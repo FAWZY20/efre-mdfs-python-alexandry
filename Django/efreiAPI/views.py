@@ -17,10 +17,17 @@ def Livre_list_published(request):
         return JsonResponse(livre_serializer.data, safe=False)
 
 
-# @api_view(['POST'])
-# def add_livre():
-#    if request.method == 'POST':
-#        return None
+@api_view(['POST'])
+def add_livre(request):
+    if request.method == 'POST':
+        livre_data = JSONParser().parse(request)
+        livre_serializer = LivreSerializer(data=livre_data)
+        if livre_serializer.is_valid():
+            livre_serializer.save()
+            return JsonResponse(livre_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(livre_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
 
 
 # @api_view(['PUT'])
@@ -41,6 +48,6 @@ def delete_livre(request, pk):
         return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'DELETE':
-        
+
         livre.delete()
         return JsonResponse({'message': 'Tutorial was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
