@@ -24,16 +24,28 @@ def add_livre(request):
         livre_serializer = LivreSerializer(data=livre_data)
         if livre_serializer.is_valid():
             livre_serializer.save()
-            return JsonResponse(livre_serializer.data, status=status.HTTP_201_CREATED) 
+            return JsonResponse(livre_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(livre_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
 
 
+@api_view(['PUT'])
+def update_livre(request, pk):
+    try:
 
-# @api_view(['PUT'])
-# def add_livre():
-#    if request.method == 'PUT':
-#        return None
+        livre = Livre.objects.get(pk=pk)
+
+    except Tutorial.DoesNotExist:
+
+        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+
+        livre_data = JSONParser().parse(request)
+        livre_serializer = LivreSerializer(livre, data=livre_data)
+        if livre_serializer.is_valid():
+            livre_serializer.save()
+            return JsonResponse(livre_serializer.data)
+        return JsonResponse(livre_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE'])
