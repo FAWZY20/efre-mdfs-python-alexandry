@@ -5,24 +5,24 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 from models import Livre
 from serializers import LivreSerializer
+=======
+from .models import Livre
+from efreiAPI.serializers import LivreSerializer
+>>>>>>> 49fd3c8b311a0d8a1bb0c12fff3851f63259fc89
 from rest_framework.decorators import api_view
 
 
-@api_view(['GET', 'POST', 'DELETE'])
-def livre_list(request):
+@api_view(['GET', 'DELETE'])
+def Livre_list_published(request):
     if request.method == 'GET':
         livres = Livre.objects.all()
-
-        titre = request.query_params.get('titre', None)
-        if titre is not None:
-            livres = livres.filter(titre__icontains=titre)
-
         livre_serializer = LivreSerializer(livres, many=True)
         return JsonResponse(livre_serializer.data, safe=False)
-        # 'safe=False' for objects serialization
 
+<<<<<<< HEAD
     elif request.method == 'POST':
 =======
 from .models import Livre
@@ -37,11 +37,16 @@ def Livre_list_published(request):
         livre_serializer = LivreSerializer(livres, many=True)
         return JsonResponse(livre_serializer.data, safe=False)
 
+=======
+>>>>>>> 49fd3c8b311a0d8a1bb0c12fff3851f63259fc89
 
 @api_view(['POST'])
 def add_livre(request):
     if request.method == 'POST':
+<<<<<<< HEAD
 >>>>>>> pull
+=======
+>>>>>>> 49fd3c8b311a0d8a1bb0c12fff3851f63259fc89
         livre_data = JSONParser().parse(request)
         livre_serializer = LivreSerializer(data=livre_data)
         if livre_serializer.is_valid():
@@ -50,23 +55,27 @@ def add_livre(request):
         return JsonResponse(livre_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     elif request.method == 'DELETE':
         count = Livre.objects.all().delete()
         return JsonResponse({'message': '{} Livres were deleted successfully!'.format(count[0])},
                             status=status.HTTP_204_NO_CONTENT)
+=======
+>>>>>>> 49fd3c8b311a0d8a1bb0c12fff3851f63259fc89
 
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def livre_detail(request, pk):
+@api_view(['PUT'])
+def update_livre(request, pk):
     try:
+
         livre = Livre.objects.get(pk=pk)
-    except Livre.DoesNotExist:
-        return JsonResponse({'message': 'The livre does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'GET':
-        livre_serializer = LivreSerializer(livre)
-        return JsonResponse(livre_serializer.data)
+    except Tutorial.DoesNotExist:
 
+        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+
+<<<<<<< HEAD
     elif request.method == 'PUT':
 =======
 
@@ -83,6 +92,8 @@ def update_livre(request, pk):
     if request.method == 'PUT':
 
 >>>>>>> pull
+=======
+>>>>>>> 49fd3c8b311a0d8a1bb0c12fff3851f63259fc89
         livre_data = JSONParser().parse(request)
         livre_serializer = LivreSerializer(livre, data=livre_data)
         if livre_serializer.is_valid():
@@ -91,15 +102,19 @@ def update_livre(request, pk):
         return JsonResponse(livre_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     elif request.method == 'DELETE':
         livre.delete()
         return JsonResponse({'message': 'Livre was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+=======
+>>>>>>> 49fd3c8b311a0d8a1bb0c12fff3851f63259fc89
 
+@api_view(['DELETE'])
+def delete_livre(request, pk):
 
-@api_view(['GET'])
-def livre_list_published(request):
-    livres = Livre.objects.filter(published=True)
+    try:
 
+<<<<<<< HEAD
     if request.method == 'GET':
         livres_serializer = LivreSerializer(livres, many=True)
         return JsonResponse(livres_serializer.data, safe=False)
@@ -113,11 +128,20 @@ def delete_livre(request, pk):
         livre = Livre.objects.get(pk=pk)
 
     except Tutorial.DoesNotExist:
+=======
+        livre = Livre.objects.get(pk=pk)
+
+    except Livre.DoesNotExist:
+>>>>>>> 49fd3c8b311a0d8a1bb0c12fff3851f63259fc89
 
         return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'DELETE':
 
         livre.delete()
+<<<<<<< HEAD
         return JsonResponse({'message': 'Tutorial was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 >>>>>>> pull
+=======
+        return JsonResponse({'message': 'Tutorial was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+>>>>>>> 49fd3c8b311a0d8a1bb0c12fff3851f63259fc89

@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+# CORS
+    'corsheaders',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = False
@@ -47,9 +49,14 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 MIDDLEWARE = [
+<<<<<<< HEAD
     # CORS
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+=======
+# CORS
+    'corsheaders.middleware.CorsMiddleware',
+>>>>>>> 49fd3c8b311a0d8a1bb0c12fff3851f63259fc89
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'API.urls'
