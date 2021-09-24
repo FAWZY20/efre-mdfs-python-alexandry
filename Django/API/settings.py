@@ -49,14 +49,8 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 MIDDLEWARE = [
-<<<<<<< HEAD
-    # CORS
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-=======
 # CORS
     'corsheaders.middleware.CorsMiddleware',
->>>>>>> 49fd3c8b311a0d8a1bb0c12fff3851f63259fc89
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
