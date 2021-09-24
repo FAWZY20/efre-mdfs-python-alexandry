@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'efreiAPI.apps.EfreiAPIConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,7 +41,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8080',
+)
+
 MIDDLEWARE = [
+    # CORS
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
