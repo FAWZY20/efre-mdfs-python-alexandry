@@ -1,11 +1,14 @@
 from rest_framework import serializers
-from models import Livre
+from .models import Livre
 
 
 class LivreSerializer(serializers.ModelSerializer):
-    class Meta:
+
+     class Meta:
         model = Livre
-        fields = ('titre',
+        fields = ('id',
+                  'titre',
                   'description',
                   'quantite',
-                  'genre')
+                  'genre'
+                  )
